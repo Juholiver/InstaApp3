@@ -1,5 +1,6 @@
-import { animation, trigger, state, style } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
+import { trigger, state, style, transition, animate } from '@angular/animations';
+
 
 @Component({
   selector: 'app-banner',
@@ -12,17 +13,23 @@ import { Component, OnInit } from '@angular/core';
       })),
       state('visivel', style({
         opacity: 1
-      }))
+      })),
+      transition('escondido => visivel', animate('2s ease-in')),
+      transition('visivel => escondido', animate('2s ease-in'))
     ])
   ]
 })
 export class BannerComponent implements OnInit {
 
-  public estado: string = 'escondido'
+  public estado: string = 'visivel'
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  public toggleEstado(): void {
+    this.estado = this.estado === 'visivel' ? 'escondido' : 'visivel'
   }
 
 }
