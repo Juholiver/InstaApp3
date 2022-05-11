@@ -7,10 +7,10 @@ import '@firebase/app'
 
 
 export class Autenticacao {
-    public cadastraUsuario (usuario: Usuario): void {
-        console.log ('chegamos ate o serviço: ', usuario)
+    public cadastraUsuario (usuario: Usuario): Promise<any> {
+        //console.log ('chegamos ate o serviço: ', usuario)
 
-        firebase.auth().createUserWithEmailAndPassword(usuario.email, usuario.senha)
+        return firebase.auth().createUserWithEmailAndPassword(usuario.email, usuario.senha)
             .then((resposta: any)=> {
               
                 //delete usuario.senha
