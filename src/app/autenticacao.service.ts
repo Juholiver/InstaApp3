@@ -7,6 +7,9 @@ import '@firebase/app'
 
 
 export class Autenticacao {
+
+    public token_id: string | undefined
+
     public cadastraUsuario (usuario: Usuario): Promise<any> {
         //console.log ('chegamos ate o serviço: ', usuario)
 
@@ -25,10 +28,14 @@ export class Autenticacao {
     }
 
     public autenticar(email: string, senha: string): void {
-        console.log('email:', email)
-        console.log('senha:', senha)
         firebase.auth().signInWithEmailAndPassword(email, senha)
-            .then((resposta: any) => console.log(resposta))
+            .then((resposta: any) => {
+                firebase.auth().currentUser?.getIdToken()
+                    .then((idToken: string) => {
+                        this.token_id = idToken
+                        console.log(this.token_id)
+                    })
+            })
             .catch((error: Error) => console.log(error))
     }
 }
