@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { ROUTES } from './app.routes';
 
 import { Autenticacao } from './autenticacao.service';
+import { AutenticacaoGuard } from './autenticacao-guard.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -37,7 +38,7 @@ import { PublicacoesComponent } from './home/publicacoes/publicacoes.component';
     RouterModule.forRoot(ROUTES)
   ],
 
-  providers: [Autenticacao],
+  providers: [Autenticacao, AutenticacaoGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
