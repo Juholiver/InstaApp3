@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import firebase from 'firebase/compat/app'
+
 
 @Component({
   selector: 'app-root',
@@ -23,6 +25,6 @@ export class AppComponent implements OnInit {
     };
     
     const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
+    //const analytics = getAnalytics(app);
   }
 }
