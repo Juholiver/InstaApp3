@@ -4,6 +4,8 @@ import { getAnalytics } from "firebase/analytics";
 import firebase from 'firebase/compat/app'
 
 
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -24,7 +26,7 @@ export class AppComponent implements OnInit {
       measurementId: "G-GJTNC6P31P"
     };
     
-    const app = initializeApp(firebaseConfig);
+    firebase.initializeApp(firebaseConfig);
     //const analytics = getAnalytics(app);
   }
 }

@@ -1,6 +1,9 @@
 import { Usuario } from "./acesso/usuario.model";
 import firebase from 'firebase/compat/app'
 import '@firebase/auth'
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
+import '@firebase/app'
 
 
 export class Autenticacao {
@@ -9,7 +12,12 @@ export class Autenticacao {
 
         firebase.auth().createUserWithEmailAndPassword(usuario.email, usuario.senha)
             .then((resposta: any)=> {
-                console.log(resposta)
+              
+                delete usuario.senha
+                
+                firebase.database().ref(`usuario_detalhe/${btoa(usuario.email)}`)
+                    .set( usuario )
+                
             })
             .catch((error: Error)=> {
                 console.log(error)
