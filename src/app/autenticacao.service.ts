@@ -13,7 +13,7 @@ export class Autenticacao {
         firebase.auth().createUserWithEmailAndPassword(usuario.email, usuario.senha)
             .then((resposta: any)=> {
               
-                delete usuario.senha
+                //delete usuario.senha
                 
                 firebase.database().ref(`usuario_detalhe/${btoa(usuario.email)}`)
                     .set( usuario )
