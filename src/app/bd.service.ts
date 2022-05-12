@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core'
-import firebase from 'firebase/compat/app'
-//import "firebase/compat/auth"
-//import "firebase/compat/firestore"
-import '@firebase/app'
-import '@firebase/auth'
+import firebase from 'firebase/compat'
+
 import { Progresso } from './progresso.service'
 
 @Injectable()

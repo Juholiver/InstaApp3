@@ -9,6 +9,10 @@ import '@firebase/auth'
 import { Bd } from 'src/app/bd.service';
 import { Progresso } from 'src/app/progresso.service';
 
+import { Observable, interval, Subject } from 'rxjs';
+import { takeUntil } from'rxjs/operators'
+
+
 @Component({
   selector: 'app-incluir-publicacao',
   templateUrl: './incluir-publicacao.component.html',
@@ -41,8 +45,24 @@ export class IncluirPublicacaoComponent implements OnInit {
       imagem: this.imagem[0]
     })
 
-    this.progresso.status
-    this.progresso.estado
+    let acompanhamentoUpload =  interval(1500);
+
+    let continua = new Subject<any>();
+
+    continua.next(true)
+
+    acompanhamentoUpload.pipe(
+    takeUntil(continua)
+    ).subscribe(() => {
+      this.progresso.status
+      this.progresso.estado
+
+      if(this.progresso.status === 'concluido') {
+        continua.next(false);
+      }
+    })
+
+
   }
 
   public preparaImagemUpload(event: Event): void {

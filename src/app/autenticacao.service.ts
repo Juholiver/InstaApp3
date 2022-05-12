@@ -1,11 +1,8 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Usuario } from "./acesso/usuario.model";
-import firebase from 'firebase/compat/app'
-import '@firebase/auth'
-import 'firebase/compat/auth';
-import 'firebase/compat/firestore';
-import '@firebase/app'
+import firebase from 'firebase/compat'
+
 
 @Injectable()
 export class Autenticacao {
