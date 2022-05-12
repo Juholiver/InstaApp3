@@ -67,7 +67,16 @@ export class Bd {
                         .then((url: string) =>  {
                             publicacao.url_imagem = url
 
-                            publicacoes.push(publicacao)
+                            //consultar o nome do usuario
+                            firebase.database().ref(`usuario_detalhe/${btoa(emailUsuario)}`)
+                                .once('value')
+                                .then((snapshot: any) => {
+                                    publicacao.nome_usuario = snapshot.val().nome_usuario
+
+                                    publicacoes.push(publicacao) 
+                                })
+
+                            
                         })
                 })
 
