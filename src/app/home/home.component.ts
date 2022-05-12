@@ -19,4 +19,8 @@ export class HomeComponent implements OnInit {
 
   }
 
+  public atualizarTimeLine(): void {
+    console.log('chegamos ate aqui')
+  }
+
 }
