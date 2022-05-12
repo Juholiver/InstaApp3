@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import firebase from 'firebase/compat';
-import "firebase/compat/auth"
-import "firebase/compat/firestore"
+//import "firebase/compat/auth"
+//import "firebase/compat/firestore"
+import '@firebase/app'
+import '@firebase/auth'
 
 import { Bd } from 'src/app/bd.service';
 
@@ -24,7 +26,7 @@ export class IncluirPublicacaoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    firebase.auth().onAuthStateChanged((user)=> {
+    firebase.auth().onAuthStateChanged((email)=> {
       this.email = this.email
     })
   }
@@ -34,6 +36,10 @@ export class IncluirPublicacaoComponent implements OnInit {
       email: this.email,
       titulo: this.formulario.value.titulo
     })
+  }
+
+  public preparaImagemUpload(event: Event): void {
+    console.log((<HTMLInputElement>event.target).files)
   }
 
 }
