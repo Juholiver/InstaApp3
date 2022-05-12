@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core'
+import { on } from 'events'
 import firebase from 'firebase/compat'
 
 import { Progresso } from './progresso.service'
@@ -45,5 +46,14 @@ export class Bd {
 
        
         
+    }
+
+    public consultaPublicacoes(emailUsuario: string): any {
+
+        firebase.database().ref(`publicacoes/${btoa(emailUsuario)}`)
+            .once('value')
+            .then((snapshot: any) => {
+                console.log(snapshot.val())
+            })
     }
 }
