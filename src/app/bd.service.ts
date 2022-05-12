@@ -1,10 +1,15 @@
+import { Injectable } from '@angular/core'
 import firebase from 'firebase/compat/app'
 //import "firebase/compat/auth"
 //import "firebase/compat/firestore"
 import '@firebase/app'
 import '@firebase/auth'
+import { Progresso } from './progresso.service'
+
+@Injectable()
 
 export class Bd {
+    constructor(private progresso: Progresso) { }
     public publicar(publicacao: any): void {
 
         let nomeImagem = Date.now()
@@ -15,14 +20,18 @@ export class Bd {
             .on(firebase.storage.TaskEvent.STATE_CHANGED,
                 //acompanhamento
                 (snapshot: any) => {
-                    console.log(snapshot)
+                    this.progresso.status = 'andamento'
+                    this.progresso.estado = snapshot
+                    //console.log(snapshot)
                 },
                 (error) => {
-                    console.log(error)
+                    this.progresso.status = 'erro'
+                    //console.log(error)
                 },
                 ()=> {
                     //finalização do processo
-                    console.log('upload completo')
+                    this.progresso.status = 'concluido'
+                    //console.log('upload completo')
                 }
                 
             )

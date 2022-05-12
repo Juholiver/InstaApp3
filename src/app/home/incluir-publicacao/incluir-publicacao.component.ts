@@ -7,6 +7,7 @@ import '@firebase/app'
 import '@firebase/auth'
 
 import { Bd } from 'src/app/bd.service';
+import { Progresso } from 'src/app/progresso.service';
 
 @Component({
   selector: 'app-incluir-publicacao',
@@ -23,7 +24,8 @@ export class IncluirPublicacaoComponent implements OnInit {
   })
 
   constructor(
-    private bd: Bd
+    private bd: Bd,
+    private progresso: Progresso
   ) { }
 
   ngOnInit(): void {
@@ -38,6 +40,9 @@ export class IncluirPublicacaoComponent implements OnInit {
       titulo: this.formulario.value.titulo,
       imagem: this.imagem[0]
     })
+
+    this.progresso.status
+    this.progresso.estado
   }
 
   public preparaImagemUpload(event: Event): void {
