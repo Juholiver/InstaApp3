@@ -52,6 +52,7 @@ export class Bd {
 
        return new Promise((resolve, reject) => {
             firebase.database().ref(`publicacoes/${btoa(emailUsuario)}`)
+                .orderByKey()
                 .once('value')
                 .then((snapshot: any) => {
                 // console.log(snapshot.val())
@@ -60,25 +61,7 @@ export class Bd {
 
                     snapshot.forEach((childSnapshot: any) =>{
 
-                        let publicacao = childSnapshot.val()
-                        //consultar url da img
-                        firebase.storage().ref()
-                            .child(`imagens/${childSnapshot.key}`)
-                            .getDownloadURL()
-                            .then((url: string) =>  {
-                                publicacao.url_imagem = url
-
-                                //consultar o nome do usuario
-                                firebase.database().ref(`usuario_detalhe/${btoa(emailUsuario)}`)
-                                    .once('value')
-                                    .then((snapshot: any) => {
-                                        publicacao.nome_usuario = snapshot.val().nome_usuario
-
-                                        publicacoes.push(publicacao) 
-                                    })
-
-                                
-                            })
+                        
                     })
 
                     resolve(publicacoes)
@@ -88,3 +71,4 @@ export class Bd {
         
     }
 }
+
